@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1160" viewBox="0 0 1800 1160" role="img" aria-label="TouchDesigner Agent network map showing standard and sample execution paths">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; fill: #e8eef5; letter-spacing: 0; }
+      .title { font-size: 40px; font-weight: 700; }
+      .subtitle { font-size: 18px; fill: #9eb0c4; }
+      .lane { font-size: 23px; font-weight: 700; }
+      .name { font-size: 19px; font-weight: 650; }
+      .body { font-size: 15px; fill: #c1cddd; }
+      .small { font-size: 14px; fill: #aabbd0; }
+      .tag { font-size: 13px; font-weight: 700; }
+      .card { fill: #182432; stroke: #40546a; stroke-width: 1.5; rx: 6; }
+      .sample { fill: #172b2a; stroke: #3a9c8b; stroke-width: 1.5; rx: 6; }
+      .core { fill: #183048; stroke: #55a4df; stroke-width: 2; rx: 6; }
+      .report { fill: #30271b; stroke: #cf9a4d; stroke-width: 1.5; rx: 6; }
+      .line { fill: none; stroke: #8eabbc; stroke-width: 3; marker-end: url(#arrow); }
+      .sampleline { fill: none; stroke: #52c6ae; stroke-width: 3; marker-end: url(#arrowgreen); }
+      .dashed { fill: none; stroke: #cf9a4d; stroke-width: 2.5; stroke-dasharray: 10 8; marker-end: url(#arrowgold); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#8eabbc"/></marker>
+    <marker id="arrowgreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#52c6ae"/></marker>
+    <marker id="arrowgold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#cf9a4d"/></marker>
+  </defs>
+  <rect width="1800" height="1160" fill="#0f1721"/>
+  <text x="70" y="76" class="title">TouchDesigner Agent: Network Map</text>
+  <text x="72" y="112" class="subtitle">What the nodes in the screenshot do, and how the two Generate paths differ</text>
+
+  <rect x="50" y="148" width="1700" height="120" fill="#142132" stroke="#344d68" rx="6"/>
+  <text x="78" y="188" class="lane" fill="#79b9e8">SHARED ENTRY</text>
+  <rect x="300" y="165" width="340" height="84" class="core"/>
+  <text x="322" y="197" class="name">llm_node_gen</text>
+  <text x="322" y="225" class="body">Generate() controller / Samplemode switch</text>
+  <path d="M640 207 H825" class="line"/>
+  <text x="854" y="199" class="body">Samplemode OFF: normal Agent path</text>
+  <text x="854" y="226" class="body">Samplemode ON: fixed fireworks prototype</text>
+
+  <rect x="50" y="292" width="1700" height="266" fill="#111d29" stroke="#35516b" rx="6"/>
+  <text x="78" y="333" class="lane" fill="#79b9e8">NORMAL AGENT PATH</text>
+  <text x="78" y="360" class="small">Model-backed generation; uses prompt, RAG, memory, and optional repair rounds</text>
+  <rect x="80" y="394" width="265" height="90" class="card"/>
+  <text x="99" y="425" class="name">prompt_template</text>
+  <text x="99" y="453" class="body">System + user prompt rules</text>
+  <rect x="386" y="394" width="260" height="90" class="card"/>
+  <text x="405" y="425" class="name">rag / session / memory</text>
+  <text x="405" y="453" class="body">Relevant docs + prior context</text>
+  <rect x="688" y="394" width="235" height="90" class="card"/>
+  <text x="707" y="425" class="name">llm_api</text>
+  <text x="707" y="453" class="body">LLM request / response</text>
+  <rect x="965" y="394" width="265" height="90" class="card"/>
+  <text x="984" y="425" class="name">node_builder</text>
+  <text x="984" y="453" class="body">JSON nodes or Python script</text>
+  <rect x="1272" y="394" width="215" height="90" class="card"/>
+  <text x="1291" y="425" class="name">gen</text>
+  <text x="1291" y="453" class="body">Generated TD network</text>
+  <rect x="1515" y="394" width="210" height="90" class="report"/>
+  <text x="1534" y="425" class="name">harness</text>
+  <text x="1534" y="453" class="body">Validate + visual checks</text>
+  <path d="M345 439 H382 M646 439 H684 M923 439 H961 M1230 439 H1268 M1487 439 H1511" class="line"/>
+  <path d="M1620 487 V520 H810 V487" class="dashed"/>
+  <text x="990" y="543" class="small">Static check before build; runtime and visual checks after build</text>
+
+  <rect x="50" y="582" width="1700" height="337" fill="#11211f" stroke="#3e776f" rx="6"/>
+  <text x="78" y="625" class="lane" fill="#66d1b8">SAMPLE PROTOTYPE PATH</text>
+  <text x="78" y="652" class="small">Preset mouse fireworks; accepts any nonempty prompt, does not call the LLM or RAG</text>
+  <rect x="78" y="688" width="270" height="90" class="sample"/>
+  <text x="97" y="719" class="name">sample_agent</text>
+  <text x="97" y="747" class="body">Sample entry / fixed response</text>
+  <rect x="387" y="688" width="270" height="90" class="sample"/>
+  <text x="406" y="719" class="name">sample_loading</text>
+  <text x="406" y="747" class="body">Timed loading transition</text>
+  <rect x="696" y="688" width="270" height="90" class="sample"/>
+  <text x="715" y="719" class="name">sample_script</text>
+  <text x="715" y="747" class="body">Preset fireworks Python</text>
+  <rect x="1005" y="688" width="285" height="90" class="sample"/>
+  <text x="1024" y="719" class="name">sample_generated_script</text>
+  <text x="1024" y="747" class="body">Copy for inspection; not run</text>
+  <rect x="1329" y="688" width="188" height="90" class="sample"/>
+  <text x="1348" y="719" class="name">gen / canvas</text>
+  <text x="1348" y="747" class="body">Interactive output</text>
+  <rect x="1547" y="688" width="178" height="90" class="report"/>
+  <text x="1565" y="719" class="name">harness</text>
+  <text x="1565" y="747" class="body">Runtime checks</text>
+  <path d="M348 733 H383 M657 733 H692 M966 733 H1001 M1517 733 H1543" class="sampleline"/>
+  <path d="M830 688 V671 H1423 V684" class="sampleline"/>
+  <text x="1115" y="662" class="small">Execute source script</text>
+  <rect x="390" y="807" width="265" height="77" class="sample"/>
+  <text x="409" y="836" class="name">sample_loading_tick</text>
+  <text x="409" y="862" class="body">Frame callback / timer</text>
+  <rect x="714" y="807" width="260" height="77" class="sample"/>
+  <text x="733" y="836" class="name">sample_loading_image</text>
+  <text x="733" y="862" class="body">Text TOP: Loading...</text>
+  <rect x="1033" y="807" width="265" height="77" class="sample"/>
+  <text x="1052" y="836" class="name">sample_loading_view</text>
+  <text x="1052" y="862" class="body">Container showing loading TOP</text>
+  <path d="M522 807 V780 M655 845 H710 M974 845 H1029" class="sampleline"/>
+
+  <rect x="50" y="944" width="1700" height="167" fill="#181e28" stroke="#48576c" rx="6"/>
+  <text x="78" y="985" class="lane">SOURCE &amp; OBSERVABILITY NODES</text>
+  <text x="80" y="1024" class="name">sample_original_source</text>
+  <text x="80" y="1054" class="body">Backup of the unpatched Agent entry</text>
+  <text x="518" y="1024" class="name">log</text>
+  <text x="518" y="1054" class="body">Execution events and errors</text>
+  <text x="807" y="1024" class="name">session_view</text>
+  <text x="807" y="1054" class="body">Current session summary</text>
+  <text x="1135" y="1024" class="name">parexec1 / harness_report</text>
+  <text x="1135" y="1054" class="body">Button callback / validation output</text>
+  <text x="80" y="1085" class="small">The screenshot's dotted line from sample_loading_image to sample_loading_view is a TOP parameter reference, not a direct family wire.</text>
+</svg>
